@@ -1,0 +1,13 @@
+# photo_dedupe.yaml
+
+supported_extensions:
+  - jpg
+  - jpeg
+  - png
+  - heic
+  - cr2
+  - arw
+  - dng
+  - nef
+  - tif
+  - tiff

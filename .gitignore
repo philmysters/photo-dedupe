@@ -1,0 +1,14 @@
+/bin/
+/output/
+*.exe
+*.out
+*.test
+.DS_Store
+Thumbs.db
+/vendor/
+.idea
+.vscode
+*.swp
+*.swo
+/testdata/
+*.log
