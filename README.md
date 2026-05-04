@@ -8,6 +8,9 @@ This project enforces:
 - Pre-commit hooks (formatting, vet, multi-linter)
 - Automated CI builds for Go (lint, vet, and **test coverage ≥98%**) on every PR
 - Dynamic code coverage badge via Codecov
+- Pre-commit status badge
+
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/philmysters/photo-dedupe/main.svg)](https://results.pre-commit.ci/latest/github/philmysters/photo-dedupe/main)
 
 ## Quickstart
 
