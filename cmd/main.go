@@ -74,11 +74,22 @@ func run(args []string, out io.Writer) error {
 
 	_, _ = fmt.Fprintf(out, "Discovered %d photo(s) in %s and %d photo(s) in %s\n", len(photoFiles1), input1, len(photoFiles2), input2)
 
-	for _, pf := range photoFiles1 {
-		_, _ = fmt.Fprintf(out, "Input1 file: %s\n", pf.Path)
+	result, err := internal.Deduplicate(photoFiles1, photoFiles2)
+	if err != nil {
+		return fmt.Errorf("deduplication failed: %w", err)
 	}
-	for _, pf := range photoFiles2 {
-		_, _ = fmt.Fprintf(out, "Input2 file: %s\n", pf.Path)
+
+	_, _ = fmt.Fprintf(out, "Deduplication results:\n")
+	_, _ = fmt.Fprintf(out, "  Duplicates:     %d\n", len(result.Duplicates))
+	_, _ = fmt.Fprintf(out, "  Unique to in1:  %d\n", len(result.UniqueToFirst))
+	_, _ = fmt.Fprintf(out, "  Unique to in2:  %d\n", len(result.UniqueToSecond))
+
+	if dryrun {
+		_, _ = fmt.Fprintln(out, "Dry run: no files written.")
+		return nil
 	}
+
+	// TODO: copy unique and deduplicated files to output directory
+	_, _ = fmt.Fprintln(out, "Output not yet implemented.")
 	return nil
 }
