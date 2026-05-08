@@ -6,6 +6,13 @@ import (
 	"testing"
 )
 
+func TestFindPhotoFiles_NonexistentRoot(t *testing.T) {
+	_, err := FindPhotoFiles("/nonexistent/path/that/does/not/exist", []string{"jpg"})
+	if err == nil {
+		t.Fatal("expected error for nonexistent root")
+	}
+}
+
 func TestFindPhotoFiles(t *testing.T) {
 	dir := t.TempDir()
 	// Create some sample files

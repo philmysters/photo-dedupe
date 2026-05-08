@@ -23,6 +23,20 @@ pre-commit install
 go run ./cmd/main.go
 ```
 
+## Testing
+
+```sh
+# Run all tests
+go test ./...
+
+# Run a single test
+go test ./internal/... -run TestFindPhotoFiles
+
+# Run with coverage report
+go test ./... -coverprofile=coverage.out
+go tool cover -func=coverage.out
+```
+
 See CONTRIBUTING.md for more details.
 
 ## Quality and Coverage

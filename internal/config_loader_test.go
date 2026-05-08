@@ -2,8 +2,35 @@ package internal
 
 import (
 	"os"
+	"strings"
 	"testing"
 )
+
+func TestLoadConfig_OpenError(t *testing.T) {
+	_, err := LoadConfig("/nonexistent/path/config.yaml")
+	if err == nil {
+		t.Fatal("expected error for nonexistent config file")
+	}
+}
+
+func TestLoadConfig_DecodeError(t *testing.T) {
+	f, err := os.CreateTemp("", "bad_yaml_*.yaml")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() { _ = os.Remove(f.Name()) }()
+	if _, err := f.WriteString("key: [\nunclosed"); err != nil {
+		t.Fatal(err)
+	}
+	if err := f.Close(); err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = LoadConfig(f.Name())
+	if err == nil || !strings.Contains(err.Error(), "failed to parse config") {
+		t.Fatalf("expected parse error, got: %v", err)
+	}
+}
 
 func TestLoadConfig_Success(t *testing.T) {
 	// Create a temp YAML config for the test
