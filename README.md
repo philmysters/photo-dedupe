@@ -8,6 +8,9 @@ This project enforces:
 - Pre-commit hooks (formatting, vet, multi-linter)
 - Automated CI builds for Go (lint, vet, and **test coverage ≥98%**) on every PR
 - Dynamic code coverage badge via Codecov
+- Pre-commit status badge
+
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/philmysters/photo-dedupe/main.svg)](https://results.pre-commit.ci/latest/github/philmysters/photo-dedupe/main)
 
 ## Quickstart
 
@@ -18,6 +21,20 @@ pre-commit install
 
 # Run the CLI (to be implemented)
 go run ./cmd/main.go
+```
+
+## Testing
+
+```sh
+# Run all tests
+go test ./...
+
+# Run a single test
+go test ./internal/... -run TestFindPhotoFiles
+
+# Run with coverage report
+go test ./... -coverprofile=coverage.out
+go tool cover -func=coverage.out
 ```
 
 See CONTRIBUTING.md for more details.

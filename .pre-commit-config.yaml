@@ -1,12 +1,20 @@
 repos:
   - repo: https://github.com/golangci/golangci-lint
-    rev: v1.57.2
+    rev: v2.12.1
     hooks:
       - id: golangci-lint
-        args: ["run"]
 
   - repo: https://github.com/dnephin/pre-commit-golang
-    rev: v1.3.0
+    rev: v0.5.1
     hooks:
       - id: go-fmt
+
+  - repo: local
+    hooks:
       - id: go-vet
+        name: go-vet
+        language: system
+        entry: go vet
+        args: ["./..."]
+        pass_filenames: false
+        types: [go]
