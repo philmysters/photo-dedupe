@@ -3,10 +3,18 @@ repos:
     rev: v2.12.1
     hooks:
       - id: golangci-lint
-        args: ["run"]
 
   - repo: https://github.com/dnephin/pre-commit-golang
     rev: v0.5.1
     hooks:
       - id: go-fmt
+
+  - repo: local
+    hooks:
       - id: go-vet
+        name: go-vet
+        language: system
+        entry: go vet
+        args: ["./..."]
+        pass_filenames: false
+        types: [go]
